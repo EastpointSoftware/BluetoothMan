@@ -9,25 +9,58 @@
 import UIKit
 import CoreBluetooth
 
-class ViewController: UIViewController, CBCentralManagerDelegate {
+class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDataSource,UITableViewDelegate {
 
     var centralManager : CBCentralManager!
+    //var peripherals = [CBPeripheral]()
+    var devices = [BluetoothDevice]()
     
+    @IBOutlet weak var tableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
-        
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.devices.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("bluetoothItem") as! BluetoothTableViewCell
+        let peripheral = self.devices[indexPath.row].device
+        if peripheral.name == nil {
+            cell.nameLabel.text = peripheral.identifier.UUIDString
+
+        }else {
+            cell.nameLabel.text = peripheral.name
+        }
+            
+        cell.rssiLabel.text = "\(self.devices[indexPath.row].rssi)"
+        return cell
         
     }
     
+    
+    
     func StartScanning(){
+        devices.removeAll()
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "StopScan", userInfo: nil, repeats: false)
         
+    }
+    
+    
+    func StopScan(){
+        self.centralManager.stopScan()
+        print("Stopped....")
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
@@ -39,6 +72,16 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         print("Advert : \(advertisementData)")
         print("RSSI   : \(RSSI)")
         print("******************")
+       
+        let tempDevice = BluetoothDevice()
+        tempDevice.device = peripheral
+        tempDevice.rssi = RSSI
+        tempDevice.advertisementData = advertisementData
+        
+        //self.peripherals.append(peripheral)
+        
+        self.devices.append(tempDevice)
+        self.tableView.reloadData()
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
@@ -46,6 +89,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         print("We are in Central Manager did update state")
         if central.state == CBCentralManagerState.PoweredOn {
             print("Bluetooth is ON")
+            
             StartScanning()
         }else
         {
@@ -60,6 +104,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         
     }
 
+    
+    @IBAction func Refresh(sender: UIBarButtonItem) {
+        
+        self.StartScanning()
+    }
+    
     
     
 
