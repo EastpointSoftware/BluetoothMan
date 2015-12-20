@@ -14,6 +14,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     var centralManager : CBCentralManager!
     //var peripherals = [CBPeripheral]()
     var devices = [BluetoothDevice]()
+    var deviceToPass = BluetoothDevice()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -48,6 +49,28 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         
     }
     
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        deviceToPass = self.devices[indexPath.row]
+        performSegueWithIdentifier("ShowDeviceDetails", sender: self)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue.identifier == "ShowDeviceDetails" {
+            if let destination = segue.destinationViewController as? ShowDeviceDetailsViewController {
+                
+                if let index = self.tableView.indexPathForSelectedRow {
+                    
+                    destination.receivedDevice = self.devices[index.row]
+                }
+                
+            }
+        }
+    }
     
     
     func StartScanning(){

@@ -16,6 +16,7 @@
 		1368D9591C24505B0014F041 /* BlueToothManUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1368D9581C24505B0014F041 /* BlueToothManUITests.swift */; };
 		13ECE1B21C24D19F00DBE7BA /* BluetoothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13ECE1B11C24D19F00DBE7BA /* BluetoothTableViewCell.swift */; };
 		13ECE1B41C24D7FD00DBE7BA /* BluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13ECE1B31C24D7FD00DBE7BA /* BluetoothDevice.swift */; };
+		13ECE1B61C26C4E500DBE7BA /* ShowDeviceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13ECE1B51C26C4E500DBE7BA /* ShowDeviceDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		1368D95A1C24505B0014F041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13ECE1B11C24D19F00DBE7BA /* BluetoothTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothTableViewCell.swift; sourceTree = "<group>"; };
 		13ECE1B31C24D7FD00DBE7BA /* BluetoothDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothDevice.swift; sourceTree = "<group>"; };
+		13ECE1B51C26C4E500DBE7BA /* ShowDeviceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowDeviceDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				1368D9381C24505A0014F041 /* AppDelegate.swift */,
 				1368D93A1C24505A0014F041 /* ViewController.swift */,
 				1368D93C1C24505A0014F041 /* Main.storyboard */,
+				13ECE1B51C26C4E500DBE7BA /* ShowDeviceDetailsViewController.swift */,
 				13ECE1B31C24D7FD00DBE7BA /* BluetoothDevice.swift */,
 				13ECE1B11C24D19F00DBE7BA /* BluetoothTableViewCell.swift */,
 				1368D93F1C24505A0014F041 /* Assets.xcassets */,
@@ -268,6 +271,7 @@
 				13ECE1B21C24D19F00DBE7BA /* BluetoothTableViewCell.swift in Sources */,
 				1368D93B1C24505A0014F041 /* ViewController.swift in Sources */,
 				13ECE1B41C24D7FD00DBE7BA /* BluetoothDevice.swift in Sources */,
+				13ECE1B61C26C4E500DBE7BA /* ShowDeviceDetailsViewController.swift in Sources */,
 				1368D9391C24505A0014F041 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
