@@ -21,14 +21,22 @@ class ShowDeviceDetailsViewController : UIViewController {
     @IBOutlet weak var deviceRSSILabel: UILabel!
     @IBOutlet weak var deviceAdvertDataLabel: UILabel!
 
+    @IBOutlet weak var deviceNameFromAdvertLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        deviceNameLabel.text = receivedDevice.device.name
+        if receivedDevice.device.name != nil {
+            deviceNameLabel.text = receivedDevice.device.name
+        }else{
+            deviceNameLabel.text = "nil"
+        }
         deviceUUIDLabel.text = receivedDevice.device.identifier.UUIDString
         deviceRSSILabel.text = "\(receivedDevice.rssi)"
         deviceAdvertDataLabel.text = "\(receivedDevice.advertisementData)"
+        let temp = NSDictionary (dictionary: receivedDevice.advertisementData)
+        deviceNameFromAdvertLabel.text = "\(temp.objectForKey("kCBAdvDataIsConnectable")!)"
+        //deviceNameFromAdvertLabel.text += receivedDevice.device.discoverServices( receivedDevice.device.identifier.UUIDString )
         
         
         

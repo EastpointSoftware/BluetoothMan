@@ -133,6 +133,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name f adv" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7u-om-L3s">
+                                <rect key="frame" x="20" y="152" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scW-fd-Z5B">
                                 <rect key="frame" x="81" y="95" width="41" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -141,6 +147,12 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZr-sW-Z96">
                                 <rect key="frame" x="86" y="124" width="36" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Advert Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fig-UN-cHA">
+                                <rect key="frame" x="20" y="245" width="91" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -163,8 +175,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Advert Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fig-UN-cHA">
-                                <rect key="frame" x="20" y="245" width="91" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQo-er-EPH">
+                                <rect key="frame" x="160" y="152" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -176,15 +188,19 @@
                             <constraint firstItem="Enj-Fu-QH7" firstAttribute="leading" secondItem="yZr-sW-Z96" secondAttribute="trailing" constant="38" id="2Ja-ow-oF8"/>
                             <constraint firstItem="scW-fd-Z5B" firstAttribute="leading" secondItem="f2a-HJ-MMT" secondAttribute="leadingMargin" constant="61" id="4fr-vy-xv4"/>
                             <constraint firstItem="GZ1-2m-BIb" firstAttribute="top" secondItem="Try-Xg-Dey" secondAttribute="bottom" constant="3" id="4uy-w5-vVs"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="K7u-om-L3s" secondAttribute="leading" id="6wx-xg-wxU"/>
                             <constraint firstItem="Try-Xg-Dey" firstAttribute="top" secondItem="H4e-jJ-aHl" secondAttribute="bottom" constant="8" id="8l7-ee-sCp"/>
                             <constraint firstItem="yZr-sW-Z96" firstAttribute="top" secondItem="scW-fd-Z5B" secondAttribute="bottom" constant="8" id="C7A-aF-HBN"/>
+                            <constraint firstItem="K7u-om-L3s" firstAttribute="top" secondItem="yZr-sW-Z96" secondAttribute="bottom" constant="7.5" id="D25-Fn-Fhh"/>
                             <constraint firstItem="Try-Xg-Dey" firstAttribute="leading" secondItem="o5A-Cg-4b8" secondAttribute="trailing" constant="38" id="FWm-JJ-2DQ"/>
                             <constraint firstItem="EWH-1k-bMf" firstAttribute="top" secondItem="H4e-jJ-aHl" secondAttribute="bottom" constant="210" id="GTy-AN-ya9"/>
                             <constraint firstAttribute="leadingMargin" secondItem="o5A-Cg-4b8" secondAttribute="leading" id="Iw6-GY-5sy"/>
                             <constraint firstItem="Enj-Fu-QH7" firstAttribute="top" secondItem="GZ1-2m-BIb" secondAttribute="bottom" constant="8" id="Je5-8R-npa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EWH-1k-bMf" secondAttribute="trailing" constant="10" id="LSe-KP-GTa"/>
+                            <constraint firstItem="EQo-er-EPH" firstAttribute="top" secondItem="Enj-Fu-QH7" secondAttribute="bottom" constant="7.5" id="VeV-Vh-LWF"/>
                             <constraint firstItem="scW-fd-Z5B" firstAttribute="top" secondItem="o5A-Cg-4b8" secondAttribute="bottom" constant="3" id="X6T-gC-JZI"/>
                             <constraint firstAttribute="leadingMargin" secondItem="EWH-1k-bMf" secondAttribute="leading" id="Z9C-fw-O1S"/>
+                            <constraint firstItem="EQo-er-EPH" firstAttribute="leading" secondItem="K7u-om-L3s" secondAttribute="trailing" constant="38" id="c2v-Gt-NOZ"/>
                             <constraint firstItem="GZ1-2m-BIb" firstAttribute="leading" secondItem="scW-fd-Z5B" secondAttribute="trailing" constant="38" id="jCQ-tj-ymI"/>
                             <constraint firstItem="scW-fd-Z5B" firstAttribute="top" secondItem="o5A-Cg-4b8" secondAttribute="bottom" constant="3" id="lmq-qE-b1G"/>
                             <constraint firstItem="yZr-sW-Z96" firstAttribute="leading" secondItem="f2a-HJ-MMT" secondAttribute="leadingMargin" constant="66" id="oCV-Hg-22L"/>
@@ -193,6 +209,7 @@
                     </view>
                     <connections>
                         <outlet property="deviceAdvertDataLabel" destination="EWH-1k-bMf" id="OXS-mp-rFb"/>
+                        <outlet property="deviceNameFromAdvertLabel" destination="EQo-er-EPH" id="BR1-hf-MHe"/>
                         <outlet property="deviceNameLabel" destination="Try-Xg-Dey" id="wDR-SE-ZUF"/>
                         <outlet property="deviceRSSILabel" destination="Enj-Fu-QH7" id="mKv-fN-QuE"/>
                         <outlet property="deviceUUIDLabel" destination="GZ1-2m-BIb" id="r9q-Ja-AnY"/>
