@@ -76,7 +76,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     func StartScanning(){
         devices.removeAll()
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "StopScan", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "StopScan", userInfo: nil, repeats: false)
         
     }
     
@@ -85,6 +85,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         self.centralManager.stopScan()
         print("Stopped....")
     }
+    
+    
+    
+    
+    
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
         

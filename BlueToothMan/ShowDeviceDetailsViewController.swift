@@ -12,9 +12,11 @@ import CoreBluetooth
 
 
 
-class ShowDeviceDetailsViewController : UIViewController {
+class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDelegate {
     
     var receivedDevice : BluetoothDevice!
+    var inputStream : NSInputStream!
+    var outputStream : NSOutputStream!
     
     @IBOutlet weak var deviceNameLabel: UILabel!
     @IBOutlet weak var deviceUUIDLabel: UILabel!
@@ -22,6 +24,10 @@ class ShowDeviceDetailsViewController : UIViewController {
     @IBOutlet weak var deviceAdvertDataLabel: UILabel!
 
     @IBOutlet weak var deviceNameFromAdvertLabel: UILabel!
+    @IBOutlet weak var deviceIdentDescLabel: UILabel!
+    
+    var deviceToConnect : CBCentralManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -36,12 +42,70 @@ class ShowDeviceDetailsViewController : UIViewController {
         deviceAdvertDataLabel.text = "\(receivedDevice.advertisementData)"
         let temp = NSDictionary (dictionary: receivedDevice.advertisementData)
         deviceNameFromAdvertLabel.text = "\(temp.objectForKey("kCBAdvDataIsConnectable")!)"
+        deviceIdentDescLabel.text = receivedDevice.device.identifier.description
+        
         //deviceNameFromAdvertLabel.text += receivedDevice.device.discoverServices( receivedDevice.device.identifier.UUIDString )
         
         
+        self.deviceToConnect = CBCentralManager(delegate: self, queue: nil)
         
         
     }
+    
+    func centralManagerDidUpdateState(central: CBCentralManager){
+        
+    }
+    
+    
+    @IBAction func connectToDevice(sender: AnyObject) {
+        
+        //var readStream: CFReadStreamRef!
+//        var writeStream: CFWriteStreamRef!
+//        
+//        
+//       // CFStreamCreatePairWithSocketToHost(nil, "192.168.0.10" as CFString, 35000, readStream, writeStream)
+//        self.inputStream = readStream as NSInputStream
+//        self.outputStream = writeStream as NSOutputStream
+//        self.inputStream.delegate = self
+//        self.outputStream.delegate = self
+//        self.inputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+//        self.outputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+//        self.inputStream.open()
+//        self.outputStream.open()
+//        
+        
+        
+        deviceToConnect.connectPeripheral(receivedDevice.device, options: nil)
+        
+        
+    }
+    
+    
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        
+        peripheral.discoverServices(nil)
+    }
+    
+    func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
+        
+        if let actualError = error {
+            
+            self.deviceNameFromAdvertLabel.text = actualError.description + "\r\n" + self.deviceNameFromAdvertLabel.text! + "\r\n"
+            
+            
+        }
+        else {
+            for service in peripheral.services as [CBService]!{
+                
+                self.deviceNameFromAdvertLabel.text  = service.description + "\r\n " + self.deviceNameFromAdvertLabel.text!
+                 peripheral.discoverCharacteristics(nil, forService: service)
+                print(service.description)
+            }
+        }
+    }
+    
+    
+    
     
     
 }
