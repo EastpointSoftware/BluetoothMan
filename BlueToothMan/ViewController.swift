@@ -12,9 +12,9 @@ import CoreBluetooth
 class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewDataSource,UITableViewDelegate {
 
     var centralManager : CBCentralManager!
-    //var peripherals = [CBPeripheral]()
     var devices = [BluetoothDevice]()
     var deviceToPass = BluetoothDevice()
+    var isScanning = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,10 +22,21 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        self.devices.removeAll()
+        self.tableView.reloadData()
+        self.StartScanning()
         
     }
     
@@ -74,9 +85,25 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     
     func StartScanning(){
+        
+        
+        print("we are in scan for devices function")
+        if (isScanning){
+            print("Scanning in progress. Now restarting")
+            self.StopScan()
+        }
+        
         devices.removeAll()
-        self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
-        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "StopScan", userInfo: nil, repeats: false)
+        
+        //NSDictionary options = {CBCentralManagerScanOptionAllowDuplicatesKey : [NSNumber numberWithBool:allowDuplicates]};
+        print("Scanning...")
+        isScanning = true
+        self.centralManager.scanForPeripheralsWithServices(nil, options: nil )
+        
+        //NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "StopScan", userInfo: nil, repeats: false)
+        
+        
+        
         
     }
     
@@ -88,28 +115,53 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     
     
-    
-    
-    
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
         
-        print("haha")
-        print("******************")
-        print("Name   : \(peripheral.name)")
-        print("UUID   : \(peripheral.identifier.UUIDString)")
-        print("Advert : \(advertisementData)")
-        print("RSSI   : \(RSSI)")
-        print("******************")
-       
+        
+        // Check whether the device is duplicate
+        
+        var isDeviceAlreadyDiscovered = false
+        
         let tempDevice = BluetoothDevice()
         tempDevice.device = peripheral
         tempDevice.rssi = RSSI
         tempDevice.advertisementData = advertisementData
+        tempDevice.isConnected = false
         
-        //self.peripherals.append(peripheral)
         
-        self.devices.append(tempDevice)
-        self.tableView.reloadData()
+        for  deviceList in devices{
+            
+            if (deviceList.device.identifier.UUIDString == tempDevice.device.identifier.UUIDString){
+                isDeviceAlreadyDiscovered = true
+                break
+            }
+            
+        }
+        
+        //if device not discovered earlier then add to device array
+        if !isDeviceAlreadyDiscovered {
+       
+            //Print Newly discovered device
+            print("******************")
+            print("Name   : \(peripheral.name)")
+            print("UUID   : \(peripheral.identifier.UUIDString)")
+            print("Advert : \(advertisementData)")
+            print("RSSI   : \(RSSI)")
+            print("******************")
+            //Add the device to the devices array
+            
+            
+            self.devices.append(tempDevice)
+            
+            // Reload the table view to display the newly added device
+            
+            self.tableView.reloadData()
+        }else
+        {
+             print("The device with UUID  \(peripheral.identifier.UUIDString) is already added to the device list")
+        }
+        
+        
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
@@ -135,6 +187,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     @IBAction func Refresh(sender: UIBarButtonItem) {
         
+        print("We are in Refersh Function")
         self.StartScanning()
     }
     

@@ -14,6 +14,7 @@ class BluetoothDevice {
     var device : CBPeripheral!
     var rssi : NSNumber!
     var advertisementData: [String : AnyObject]!
+    var isConnected : Bool!
     
     
 }

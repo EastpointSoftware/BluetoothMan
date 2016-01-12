@@ -26,7 +26,7 @@ class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDeleg
     @IBOutlet weak var deviceNameFromAdvertLabel: UILabel!
     @IBOutlet weak var deviceIdentDescLabel: UILabel!
     
-    var deviceToConnect : CBCentralManager!
+    var centralManager : CBCentralManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +46,10 @@ class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDeleg
         
         //deviceNameFromAdvertLabel.text += receivedDevice.device.discoverServices( receivedDevice.device.identifier.UUIDString )
         
+        //self.receivedDevice.delegate = self
+        //centralManager.delegate = self
+        self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
-        self.deviceToConnect = CBCentralManager(delegate: self, queue: nil)
         
         
     }
@@ -74,16 +76,39 @@ class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDeleg
 //        self.outputStream.open()
 //        
         
+        print("Connecting to \(receivedDevice.advertisementData.description) ...")
         
-        deviceToConnect.connectPeripheral(receivedDevice.device, options: nil)
+        centralManager.connectPeripheral(receivedDevice.device, options: nil)
+        
+        /*centralManager.connectPeripheral(receivedDevice.device, options:[CBConnectPeripheralOptionNotifyOnConnectionKey : true,
+            CBConnectPeripheralOptionNotifyOnDisconnectionKey : true,
+            CBConnectPeripheralOptionNotifyOnNotificationKey : true])
+            let cbp =  centralManager.retrievePeripheralsWithIdentifiers([NSUUID(UUIDString: receivedDevice.device.identifier.UUIDString)!]  )
+
+        if cbp.count > 0 {
+            centralManager.connectPeripheral(cbp[0], options:[CBConnectPeripheralOptionNotifyOnConnectionKey : true,
+                CBConnectPeripheralOptionNotifyOnDisconnectionKey : true,
+                CBConnectPeripheralOptionNotifyOnNotificationKey : true])
+        }*/
         
         
     }
     
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        
+        if (error != nil) {
+            
+            print("error connecting to peripheral \(peripheral.description) " + (error?.description)!)
+        }
+        
+        
+    }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         
         peripheral.discoverServices(nil)
+        
+        print("Connected to peripheral")
     }
     
     func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
