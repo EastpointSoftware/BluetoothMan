@@ -75,7 +75,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         
         // Connect on select from Table View
         
-        LogMessage("Selected Device is \(deviceToPass.device.identifier.UUIDString)")
+        LogMessage("Connecting to device \(deviceToPass.device.identifier.UUIDString)")
         centralManager.connectPeripheral(deviceToPass.device, options: nil)
         
         
@@ -97,7 +97,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         //Write log that device connected
         
-         LogMessage("Connected to peripheral")
+         LogMessage("Connected to peripheral \(peripheral.identifier.UUIDString)")
         
         //Discover Services
         peripheral.discoverServices(nil)
