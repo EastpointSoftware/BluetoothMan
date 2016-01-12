@@ -18,6 +18,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var LogView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         self.tableView.delegate = self
         
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        LogView.text = ""
+    }
+    
+    func LogMessage(newLog: String){
+        
+       LogView.text = (newLog + "\r\n" + LogView.text )
         
     }
     
@@ -65,53 +72,63 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         
         
         deviceToPass = self.devices[indexPath.row]
-        performSegueWithIdentifier("ShowDeviceDetails", sender: self)
+        
+        // Connect on select from Table View
+        
+        LogMessage("Selected Device is \(deviceToPass.device.identifier.UUIDString)")
+        centralManager.connectPeripheral(deviceToPass.device, options: nil)
+        
+        
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        if segue.identifier == "ShowDeviceDetails" {
-            if let destination = segue.destinationViewController as? ShowDeviceDetailsViewController {
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    
+        // Handle the failure and display exception in the UI Log
+        
+        if (error != nil) {
+            
+            LogMessage("error connecting to peripheral \(peripheral.description) " + (error?.description)!)
+        }
+        
+        
+    }
+    
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        //Write log that device connected
+        
+         LogMessage("Connected to peripheral")
+        
+        //Discover Services
+        peripheral.discoverServices(nil)
+        
+        
+    }
+    
+    
+    func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
+        ///TODO : Log all services discovered
+        
+        if let actualError = error {
+            
+            LogMessage (actualError.description )
+            
+            
+        }
+        else {
+            for service in peripheral.services as [CBService]!{
+                LogMessage ("***********************")
+                LogMessage ("Service Name : " + service.description)
                 
-                if let index = self.tableView.indexPathForSelectedRow {
-                    
-                    destination.receivedDevice = self.devices[index.row]
-                }
-                
+                peripheral.discoverCharacteristics(nil, forService: service)
+                LogMessage ("***********************")
             }
         }
-    }
-    
-    
-    func StartScanning(){
-        
-        
-        print("we are in scan for devices function")
-        if (isScanning){
-            print("Scanning in progress. Now restarting")
-            self.StopScan()
-        }
-        
-        devices.removeAll()
-        
-        //NSDictionary options = {CBCentralManagerScanOptionAllowDuplicatesKey : [NSNumber numberWithBool:allowDuplicates]};
-        print("Scanning...")
-        isScanning = true
-        self.centralManager.scanForPeripheralsWithServices(nil, options: nil )
-        
-        //NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "StopScan", userInfo: nil, repeats: false)
-        
-        
+
         
         
     }
     
-    
-    func StopScan(){
-        self.centralManager.stopScan()
-        print("Stopped....")
-    }
     
     
     
@@ -142,23 +159,25 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         if !isDeviceAlreadyDiscovered {
        
             //Print Newly discovered device
-            print("******************")
-            print("Name   : \(peripheral.name)")
-            print("UUID   : \(peripheral.identifier.UUIDString)")
-            print("Advert : \(advertisementData)")
-            print("RSSI   : \(RSSI)")
-            print("******************")
+            LogMessage("******************")
+            LogMessage("New device discovered")
+            LogMessage("Name   : \(peripheral.name)")
+            LogMessage("UUID   : \(peripheral.identifier.UUIDString)")
+            LogMessage("Advert : \(advertisementData)")
+            LogMessage("RSSI   : \(RSSI)")
+            LogMessage("******************")
             //Add the device to the devices array
             
             
             self.devices.append(tempDevice)
-            
+            LogMessage("New device added to device array")
             // Reload the table view to display the newly added device
             
             self.tableView.reloadData()
+            LogMessage("Reloaded Table View ")
         }else
         {
-             print("The device with UUID  \(peripheral.identifier.UUIDString) is already added to the device list")
+             LogMessage("The device with UUID  \(peripheral.identifier.UUIDString) is already added to the device list")
         }
         
         
@@ -166,11 +185,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
         
-        print("We are in Central Manager did update state")
+        LogMessage("We are in Central Manager did update state")
         if central.state == CBCentralManagerState.PoweredOn {
-            print("Bluetooth is ON")
+            LogMessage("Bluetooth is ON")
             
-            StartScanning()
+            //StartScanning()
         }else
         {
             let alertViewController = UIAlertController(title: "Bluetooth Man", message: "Make sure that your bluetooth is on", preferredStyle: UIAlertControllerStyle.Alert)
@@ -179,15 +198,48 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
             })
             alertViewController.addAction(action)
             self.presentViewController(alertViewController, animated: true, completion: nil)
-            print("Bluetooth is OFF")
+            LogMessage("Bluetooth is OFF")
         }
         
     }
 
     
+    func StartScanning(){
+        
+        
+        LogMessage("we are in scan for devices function")
+        if (isScanning){
+            LogMessage("Scanning in progress. Now restarting")
+            self.StopScan()
+        }
+        
+        devices.removeAll()
+        
+        //NSDictionary options = {CBCentralManagerScanOptionAllowDuplicatesKey : [NSNumber numberWithBool:allowDuplicates]};
+        LogMessage("Scanning...")
+        isScanning = true
+        self.centralManager.scanForPeripheralsWithServices(nil, options: nil )
+        
+        //NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "StopScan", userInfo: nil, repeats: false)
+        
+        
+        
+        
+    }
+    
+    
+    func StopScan(){
+        self.centralManager.stopScan()
+        LogMessage("Stopped....")
+    }
+    
+    
+    
+    
+    
     @IBAction func Refresh(sender: UIBarButtonItem) {
         
-        print("We are in Refersh Function")
+        LogMessage("We are in Refersh Function")
         self.StartScanning()
     }
     

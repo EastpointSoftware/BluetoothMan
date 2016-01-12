@@ -48,6 +48,7 @@ class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDeleg
         
         //self.receivedDevice.delegate = self
         //centralManager.delegate = self
+        
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
         
@@ -55,7 +56,21 @@ class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDeleg
     }
     
     func centralManagerDidUpdateState(central: CBCentralManager){
-        
+        print("We are in Central Manager did update state")
+        if centralManager.state == CBCentralManagerState.PoweredOn {
+            print("Bluetooth is ON")
+            
+        }else
+        {
+            let alertViewController = UIAlertController(title: "Bluetooth Man", message: "Make sure that your bluetooth is on", preferredStyle: UIAlertControllerStyle.Alert)
+            let action = UIAlertAction(title: "Bluetooth Not working", style: UIAlertActionStyle.Default, handler: { (act  : UIAlertAction) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+            alertViewController.addAction(action)
+            self.presentViewController(alertViewController, animated: true, completion: nil)
+            print("Bluetooth is OFF")
+        }
+
     }
     
     
@@ -128,6 +143,8 @@ class ShowDeviceDetailsViewController : UIViewController , CBCentralManagerDeleg
             }
         }
     }
+   
+    
     
     
     
