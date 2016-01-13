@@ -15,6 +15,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     var devices = [BluetoothDevice]()
     var deviceToPass = BluetoothDevice()
     var isScanning = false
+    var selectedDeviceIndex : Int!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -73,8 +74,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        //Note down the device row number selected for further use
+        selectedDeviceIndex = indexPath.row
         
         deviceToPass = self.devices[indexPath.row]
+        
         
         // Connect on select from Table View
         
@@ -94,6 +98,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
             LogMessage("error connecting to peripheral \(peripheral.description) " + (error?.description)!)
         }
         
+        // nil the selectedDeviceIndex 
+        selectedDeviceIndex = nil
+        
         
     }
     
@@ -102,8 +109,18 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         
          LogMessage("Connected to peripheral \(peripheral.identifier.UUIDString)")
         
-        //Discover Services
-        peripheral.discoverServices(nil)
+        if selectedDeviceIndex != nil {
+       
+            //Discover Services
+            let serviceUUIDs: [CBUUID] = (devices[selectedDeviceIndex].advertisementData[CBAdvertisementDataServiceUUIDsKey] as! [CBUUID])
+            
+            LogMessage("service uuid count \(serviceUUIDs.count)")
+            
+            peripheral.discoverServices(serviceUUIDs)
+            
+        }else{
+            LogMessage("selectedDeviceIndex is nil")
+        }
         
         
     }
