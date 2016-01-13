@@ -40,6 +40,9 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
     
     override func viewDidAppear(animated: Bool) {
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidEnterBackground:", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidEnterForeground:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.devices.removeAll()
         self.tableView.reloadData()
@@ -243,7 +246,13 @@ class ViewController: UIViewController, CBCentralManagerDelegate,UITableViewData
         self.StartScanning()
     }
     
+    func applicationDidEnterBackground(application: UIApplication) {
+        self.StopScan()
+    }
     
+    func applicationDidEnterForeground(application: UIApplication) {
+    
+    }
     
 
 }
