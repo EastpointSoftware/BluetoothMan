@@ -20,6 +20,34 @@
                ReferencedContainer = "container:BlueToothMan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1368D9481C24505B0014F041"
+               BuildableName = "BlueToothManTests.xctest"
+               BlueprintName = "BlueToothManTests"
+               ReferencedContainer = "container:BlueToothMan.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1368D9531C24505B0014F041"
+               BuildableName = "BlueToothManUITests.xctest"
+               BlueprintName = "BlueToothManUITests"
+               ReferencedContainer = "container:BlueToothMan.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,26 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1368D9481C24505B0014F041"
-               BuildableName = "BlueToothManTests.xctest"
-               BlueprintName = "BlueToothManTests"
-               ReferencedContainer = "container:BlueToothMan.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1368D9531C24505B0014F041"
-               BuildableName = "BlueToothManUITests.xctest"
-               BlueprintName = "BlueToothManUITests"
-               ReferencedContainer = "container:BlueToothMan.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
