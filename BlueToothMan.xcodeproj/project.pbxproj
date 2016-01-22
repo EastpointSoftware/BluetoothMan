@@ -42,6 +42,8 @@
 		138159581C513ADB00717D0E /* PeripheralServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159571C513ADB00717D0E /* PeripheralServicesViewController.swift */; };
 		1381595A1C513AE800717D0E /* PeripheralAdvertisementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159591C513AE800717D0E /* PeripheralAdvertisementsViewController.swift */; };
 		1381595C1C51528D00717D0E /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1381595B1C51528D00717D0E /* ServiceCell.swift */; };
+		138159601C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */; };
+		138159621C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		138159571C513ADB00717D0E /* PeripheralServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServicesViewController.swift; sourceTree = "<group>"; };
 		138159591C513AE800717D0E /* PeripheralAdvertisementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralAdvertisementsViewController.swift; sourceTree = "<group>"; };
 		1381595B1C51528D00717D0E /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
+		1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicsViewController.swift; sourceTree = "<group>"; };
+		138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,8 @@
 				138159151C5106CF00717D0E /* Central */,
 				1368D9381C24505A0014F041 /* AppDelegate.swift */,
 				1368D93C1C24505A0014F041 /* Main.storyboard */,
+				138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */,
+				1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */,
 				138159421C511DCF00717D0E /* PeripheralsListsController.swift */,
 				138159461C5120C400717D0E /* PeripheralViewController.swift */,
 				138159591C513AE800717D0E /* PeripheralAdvertisementsViewController.swift */,
@@ -392,6 +398,7 @@
 				1381595A1C513AE800717D0E /* PeripheralAdvertisementsViewController.swift in Sources */,
 				1381594E1C5138C400717D0E /* ConfigStore.swift in Sources */,
 				1381592A1C51090700717D0E /* ProfileManager.swift in Sources */,
+				138159601C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift in Sources */,
 				1381593F1C51156100717D0E /* DoubleExtensions.swift in Sources */,
 				1381591D1C51079200717D0E /* Peripheral.swift in Sources */,
 				138159281C5108DD00717D0E /* CharacteristicProfile.swift in Sources */,
@@ -401,6 +408,7 @@
 				1381593D1C51154000717D0E /* StringExtensions.swift in Sources */,
 				1368D9391C24505A0014F041 /* AppDelegate.swift in Sources */,
 				138159391C51135800717D0E /* UInt8Extensions.swift in Sources */,
+				138159621C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift in Sources */,
 				138159431C511DCF00717D0E /* PeripheralsListsController.swift in Sources */,
 				138159351C51130200717D0E /* Int8Extensions.swift in Sources */,
 				138159251C51088700717D0E /* Logger.swift in Sources */,
