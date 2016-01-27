@@ -44,6 +44,7 @@
 		1381595C1C51528D00717D0E /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1381595B1C51528D00717D0E /* ServiceCell.swift */; };
 		138159601C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */; };
 		138159621C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */; };
+		138159651C59384F00717D0E /* CharacteristicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159641C59384F00717D0E /* CharacteristicCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		1381595B1C51528D00717D0E /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicsViewController.swift; sourceTree = "<group>"; };
 		138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicViewController.swift; sourceTree = "<group>"; };
+		138159641C59384F00717D0E /* CharacteristicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +253,7 @@
 			children = (
 				1381594A1C51372900717D0E /* PeripheralCell.swift */,
 				1381595B1C51528D00717D0E /* ServiceCell.swift */,
+				138159641C59384F00717D0E /* CharacteristicCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				138159451C511FB200717D0E /* UITableViewControllerExtensions.swift in Sources */,
 				1381591B1C51076300717D0E /* Characteristic.swift in Sources */,
 				1381592C1C51092D00717D0E /* ServiceProfile.swift in Sources */,
+				138159651C59384F00717D0E /* CharacteristicCell.swift in Sources */,
 				138159581C513ADB00717D0E /* PeripheralServicesViewController.swift in Sources */,
 				1381593B1C51137800717D0E /* UInt16Extensions.swift in Sources */,
 				138159471C5120C400717D0E /* PeripheralViewController.swift in Sources */,

@@ -44,9 +44,9 @@ class PeripheralServicesViewController : UITableViewController {
     
     override func prepareForSegue(segue:UIStoryboardSegue, sender:AnyObject!) {
         
-        ///TODO : PeripheralServiceCharacteristicsViewController yet to be implemented
+        // PeripheralServiceCharacteristicsViewController yet to be implemented
         
-        /*if segue.identifier == MainStoryboard.peripheralServicesCharacteritics {
+        if segue.identifier == MainStoryboard.peripheralServicesCharacteritics {
             if let peripheral = self.peripheral {
                 if let selectedIndex = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                    
@@ -56,12 +56,12 @@ class PeripheralServicesViewController : UITableViewController {
                     
                 }
             }
-        }*/
+        }
     }
     
     override func shouldPerformSegueWithIdentifier(identifier:String?, sender:AnyObject?) -> Bool {
-        ///TODO : Chnage this to true once we have screens for characteristics
-        return false
+        // Chnage this to true once we have screens for characteristics
+        return true
     }
     
     func peripheralDisconnected() {
@@ -96,21 +96,30 @@ class PeripheralServicesViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        print(MainStoryboard.peripheralServiceCell)
+        print("\(indexPath.row)")
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(MainStoryboard.peripheralServiceCell, forIndexPath: indexPath) as! ServiceCell
-        let service = peripheral.services[indexPath.row]
-        cell.nameLabel.text = service.name
-        cell.uuidLabel.text = service.uuid.UUIDString
-        if let peripheralViewController = self.peripheralViewController {
-            if peripheralViewController.peripehealConnected {
-                cell.nameLabel.textColor = UIColor.blackColor()
+        
+            
+            let service = peripheral.services[indexPath.row]
+            cell.nameLabel.text = service.name
+            cell.uuidLabel.text = service.uuid.UUIDString
+            if let peripheralViewController = self.peripheralViewController {
+                if peripheralViewController.peripehealConnected {
+                    cell.nameLabel.textColor = UIColor.blackColor()
+                } else {
+                    cell.nameLabel.textColor = UIColor.lightGrayColor()
+                }
             } else {
-                cell.nameLabel.textColor = UIColor.lightGrayColor()
+                cell.nameLabel.textColor = UIColor.blackColor()
             }
-        } else {
-            cell.nameLabel.textColor = UIColor.blackColor()
-        }
-        return cell
+         return cell
+        
     }
+    
     
     
     // UITableViewDelegate
