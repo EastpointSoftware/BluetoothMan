@@ -45,6 +45,10 @@
 		138159601C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */; };
 		138159621C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */; };
 		138159651C59384F00717D0E /* CharacteristicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138159641C59384F00717D0E /* CharacteristicCell.swift */; };
+		1397EA741C6A3AA10067F027 /* BLESIGGATTProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA731C6A3AA10067F027 /* BLESIGGATTProfiles.swift */; };
+		1397EA761C6A3B380067F027 /* ServiceProfileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA751C6A3B380067F027 /* ServiceProfileUtils.swift */; };
+		1397EA781C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA771C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift */; };
+		13F1557D1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1557C1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +113,10 @@
 		1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicsViewController.swift; sourceTree = "<group>"; };
 		138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicViewController.swift; sourceTree = "<group>"; };
 		138159641C59384F00717D0E /* CharacteristicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicCell.swift; sourceTree = "<group>"; };
+		1397EA731C6A3AA10067F027 /* BLESIGGATTProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESIGGATTProfiles.swift; sourceTree = "<group>"; };
+		1397EA751C6A3B380067F027 /* ServiceProfileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProfileUtils.swift; sourceTree = "<group>"; };
+		1397EA771C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TISensorTagServiceProfiles.swift; sourceTree = "<group>"; };
+		13F1557C1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,12 +167,15 @@
 		1368D9371C24505A0014F041 /* BlueToothMan */ = {
 			isa = PBXGroup;
 			children = (
+				1397EA721C6A3A770067F027 /* BLE Profile Definition */,
+				13F155771C5A6EE100AEEB56 /* Core */,
 				1381594C1C5138AC00717D0E /* Utilities */,
 				1381592F1C51098B00717D0E /* Extensions */,
 				138159261C5108B800717D0E /* Service Profiles */,
 				138159151C5106CF00717D0E /* Central */,
 				1368D9381C24505A0014F041 /* AppDelegate.swift */,
 				1368D93C1C24505A0014F041 /* Main.storyboard */,
+				13F1557C1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift */,
 				138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */,
 				1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */,
 				138159421C511DCF00717D0E /* PeripheralsListsController.swift */,
@@ -256,6 +267,23 @@
 				138159641C59384F00717D0E /* CharacteristicCell.swift */,
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		1397EA721C6A3A770067F027 /* BLE Profile Definition */ = {
+			isa = PBXGroup;
+			children = (
+				1397EA731C6A3AA10067F027 /* BLESIGGATTProfiles.swift */,
+				1397EA751C6A3B380067F027 /* ServiceProfileUtils.swift */,
+				1397EA771C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift */,
+			);
+			name = "BLE Profile Definition";
+			sourceTree = "<group>";
+		};
+		13F155771C5A6EE100AEEB56 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				138159451C511FB200717D0E /* UITableViewControllerExtensions.swift in Sources */,
+				1397EA741C6A3AA10067F027 /* BLESIGGATTProfiles.swift in Sources */,
 				1381591B1C51076300717D0E /* Characteristic.swift in Sources */,
 				1381592C1C51092D00717D0E /* ServiceProfile.swift in Sources */,
 				138159651C59384F00717D0E /* CharacteristicCell.swift in Sources */,
@@ -406,6 +435,7 @@
 				1381593F1C51156100717D0E /* DoubleExtensions.swift in Sources */,
 				1381591D1C51079200717D0E /* Peripheral.swift in Sources */,
 				138159281C5108DD00717D0E /* CharacteristicProfile.swift in Sources */,
+				1397EA761C6A3B380067F027 /* ServiceProfileUtils.swift in Sources */,
 				138159231C51082A00717D0E /* SimpleFutures.swift in Sources */,
 				138159371C51132100717D0E /* Int16Extensions.swift in Sources */,
 				138159331C5112E900717D0E /* NSDataExtensions.swift in Sources */,
@@ -422,7 +452,9 @@
 				1381591F1C5107C200717D0E /* Service.swift in Sources */,
 				138159521C5139E200717D0E /* UIAlertViewExtensions.swift in Sources */,
 				138159561C513AB300717D0E /* ProgressView.swift in Sources */,
+				13F1557D1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift in Sources */,
 				1381595C1C51528D00717D0E /* ServiceCell.swift in Sources */,
+				1397EA781C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift in Sources */,
 				138159171C5106E900717D0E /* BCErrors.swift in Sources */,
 				138159191C51073000717D0E /* CentralManager.swift in Sources */,
 			);

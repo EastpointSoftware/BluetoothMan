@@ -17,6 +17,7 @@ class PeripheralServiceCharacteristicsViewController : UITableViewController {
     struct MainStoryboard {
         static let peripheralServiceCharacteristicCell  = "PeripheralServiceCharacteristicCell"
         static let peripheralServiceCharacteristicSegue = "PeripheralServiceCharacteristic"
+        static let characteristicsDetailSegue = "CharacteristicsDetails"
     }
     
     required init?(coder aDecoder:NSCoder) {
@@ -42,7 +43,7 @@ class PeripheralServiceCharacteristicsViewController : UITableViewController {
     }
     
     override func prepareForSegue(segue:UIStoryboardSegue, sender:AnyObject!) {
-        if segue.identifier == MainStoryboard.peripheralServiceCharacteristicSegue {
+        /*if segue.identifier == MainStoryboard.peripheralServiceCharacteristicSegue {
             if let service = self.service {
                 if let selectedIndex = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                     let viewController = segue.destinationViewController as! PeripheralServiceCharacteristicViewController
@@ -50,7 +51,21 @@ class PeripheralServiceCharacteristicsViewController : UITableViewController {
                     viewController.peripheralViewController = self.peripheralViewController
                 }
             }
+        }*/
+        
+        
+        if segue.identifier == MainStoryboard.characteristicsDetailSegue {
+            if let service1 = self.service {
+                if let selectedIndex1 = self.tableView.indexPathForCell(sender as! UITableViewCell){
+                    
+                    let viewController = segue.destinationViewController as! PeripheralServiceCharacteristicDetailsViewController
+                    viewController.characteristic = service1.characteristics[selectedIndex1.row]
+                    viewController.peripheralViewController = self.peripheralViewController
+                    
+                }
+            }
         }
+        
     }
     
     override func shouldPerformSegueWithIdentifier(identifier:String?, sender:AnyObject?) -> Bool {

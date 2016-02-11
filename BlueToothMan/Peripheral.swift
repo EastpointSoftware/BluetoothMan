@@ -171,7 +171,7 @@ public class Peripheral : NSObject, CBPeripheralDelegate {
         self.advertisements = PeripheralAdvertisements(advertisements:advertisements)
         self.centralManager = centralManager
         self.rssi = rssi
-        self.timeoutQueue = Queue("us.gnos.peripheral-timeout-\(cbPeripheral.identifier.UUIDString)")
+        self.timeoutQueue = Queue("edu.jeeva.peripheral-timeout-\(cbPeripheral.identifier.UUIDString)")
         self.servicesDiscoveredPromise = Promise<Peripheral>()
         self.readRSSIPromise = Promise<Int>()
         super.init()

@@ -48,6 +48,8 @@ public class Characteristic {
     private let defaultTimeout  = 10.0
     
     public let cbCharacteristic : CBCharacteristic
+    public let peripheralUUID : CBUUID
+    public let serviceUUID : CBUUID
     
     public var uuid : CBUUID {
         return self.cbCharacteristic.UUID
@@ -169,6 +171,9 @@ public class Characteristic {
     public init(cbCharacteristic:CBCharacteristic, service:Service) {
         self.cbCharacteristic = cbCharacteristic
         self._service = service
+        self.peripheralUUID = service.peripheralUUID
+        self.serviceUUID = service.uuid
+        
         if let serviceProfile = ProfileManager.sharedInstance.serviceProfiles[service.uuid] {
             Logger.debug("creating characteristic for service profile: \(service.name):\(service.uuid)")
             if let characteristicProfile = serviceProfile.characteristicProfiles[cbCharacteristic.UUID] {

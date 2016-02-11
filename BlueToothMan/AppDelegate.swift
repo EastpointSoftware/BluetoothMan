@@ -38,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         
+        TISensorTagServiceProfiles.create()
+        BLESIGGATTProfiles.create()
+        
+        
         application.registerUserNotificationSettings(
             UIUserNotificationSettings(forTypes:[UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge], categories:nil))
         return true

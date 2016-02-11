@@ -20,6 +20,7 @@ public class Service {
     private weak var _peripheral : Peripheral?
     
     public let cbService : CBService
+    public let peripheralUUID : CBUUID
     
     public var characteristicsDiscoveredPromise : Promise<Service> {
         return self._characteristicsDiscoveredPromise
@@ -49,6 +50,7 @@ public class Service {
         self.cbService = cbService
         self._peripheral = peripheral
         self.profile = ProfileManager.sharedInstance.serviceProfiles[cbService.UUID]
+        self.peripheralUUID = CBUUID(string: peripheral.identifier.UUIDString)
     }
     
     public func discoverAllCharacteristics() -> Future<Service> {
