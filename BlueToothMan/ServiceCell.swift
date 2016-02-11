@@ -11,7 +11,19 @@ import UIKit
 
 class ServiceCell : UITableViewCell {
     
+    
+    var delegate : Characteristic!
     @IBOutlet var nameLabel     : UILabel!
     @IBOutlet var uuidLabel     : UILabel!
+    @IBOutlet var uartButton    : UIButton!
+    
+    
+    
+    @IBAction func InteractWithService(sender: AnyObject) {
+        
+        
+        
+    }
+    
     
 }

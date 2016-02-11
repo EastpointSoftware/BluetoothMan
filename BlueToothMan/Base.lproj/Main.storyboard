@@ -326,11 +326,21 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmT-uJ-D5o">
+                                            <rect key="frame" x="499" y="43" width="40" height="30"/>
+                                            <state key="normal" title="UART"/>
+                                            <connections>
+                                                <action selector="InteractWithService:" destination="xyK-88-bvJ" eventType="touchUpInside" id="Adz-d3-uDd"/>
+                                                <segue destination="Lxy-8f-Dsb" kind="show" identifier="ViewUART" id="5uD-Ye-d16"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="W0i-96-fWR" firstAttribute="leading" secondItem="zzn-nG-5Cs" secondAttribute="leadingMargin" constant="12" id="8Uf-Di-t46"/>
                                         <constraint firstItem="ItS-0I-J3z" firstAttribute="leading" secondItem="zzn-nG-5Cs" secondAttribute="leadingMargin" constant="12" id="Bis-Tv-9uK"/>
                                         <constraint firstItem="ItS-0I-J3z" firstAttribute="top" secondItem="zzn-nG-5Cs" secondAttribute="topMargin" constant="9" id="DWB-Qm-KrV"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="FmT-uJ-D5o" secondAttribute="bottom" constant="-1.5" id="MVu-3Y-0K3"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="FmT-uJ-D5o" secondAttribute="trailing" constant="20" id="QyT-IM-Xdr"/>
                                         <constraint firstItem="W0i-96-fWR" firstAttribute="top" secondItem="zzn-nG-5Cs" secondAttribute="topMargin" constant="28" id="Uha-2r-Q2r"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="W0i-96-fWR" secondAttribute="trailing" constant="-1" id="th6-N4-b0z"/>
                                         <constraint firstItem="ItS-0I-J3z" firstAttribute="trailing" secondItem="zzn-nG-5Cs" secondAttribute="trailingMargin" id="yHu-LW-uUm"/>
@@ -338,6 +348,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="W0i-96-fWR" id="w9v-Bb-3wI"/>
+                                    <outlet property="uartButton" destination="FmT-uJ-D5o" id="UUy-KL-2Xs"/>
                                     <outlet property="uuidLabel" destination="ItS-0I-J3z" id="pZU-79-Phl"/>
                                     <segue destination="dEZ-uv-aqb" kind="show" identifier="PeripheralServicesCharacteritics" id="RIz-4K-cKa"/>
                                 </connections>
@@ -400,6 +411,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84G-Oh-wUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3097" y="-386"/>
+        </scene>
+        <!--Interact View Controller-->
+        <scene sceneID="djb-km-28S">
+            <objects>
+                <viewController id="Lxy-8f-Dsb" customClass="InteractViewController" customModule="BlueToothMan" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C66-bk-zrx"/>
+                        <viewControllerLayoutGuide type="bottom" id="NrQ-19-kdQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aUa-Xp-zEp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7TQ-N0-abK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2419" y="349"/>
         </scene>
         <!--Peripheral Service Characteristic Details View Controller-->
         <scene sceneID="7hd-t7-BWt">

@@ -9,7 +9,11 @@
 
 import UIKit
 
-class PeripheralServicesViewController : UITableViewController {
+protocol MyCustomCellDelegator {
+    func callSegueFromCell(myData dataobject: Characteristic)
+}
+
+class PeripheralServicesViewController : UITableViewController,MyCustomCellDelegator {
     
     weak var peripheral             : Peripheral!
     var peripheralViewController    : PeripheralViewController!
@@ -18,6 +22,7 @@ class PeripheralServicesViewController : UITableViewController {
     struct MainStoryboard {
         static let peripheralServiceCell            = "PeripheralServiceCell"
         static let peripheralServicesCharacteritics = "PeripheralServicesCharacteritics"
+        static let viewUART = "ViewUART"
     }
     
     required init?(coder aDecoder:NSCoder) {
@@ -43,8 +48,7 @@ class PeripheralServicesViewController : UITableViewController {
     }
     
     override func prepareForSegue(segue:UIStoryboardSegue, sender:AnyObject!) {
-        
-        // PeripheralServiceCharacteristicsViewController yet to be implemented
+       
         
         if segue.identifier == MainStoryboard.peripheralServicesCharacteritics {
             if let peripheral = self.peripheral {
@@ -55,13 +59,31 @@ class PeripheralServicesViewController : UITableViewController {
                     viewController.peripheralViewController = self.peripheralViewController
                     
                 }
+                
             }
+            if segue.identifier == MainStoryboard.viewUART {
+                if let peripheral1 = self.peripheral {
+                    if let selectedIndex1 = self.tableView.indexPathForCell(sender as! UITableViewCell){
+                        
+                        let viewController1 = segue.destinationViewController as! InteractViewController
+                        viewController1.service = peripheral1.services[selectedIndex1.row]
+
+                    }
+                }
+            }
+            
+            
         }
     }
     
     override func shouldPerformSegueWithIdentifier(identifier:String?, sender:AnyObject?) -> Bool {
-        // Chnage this to true once we have screens for characteristics
+       
         return true
+    }
+    
+    
+    func callSegueFromCell(myData mydata: Characteristic){
+        
     }
     
     func peripheralDisconnected() {

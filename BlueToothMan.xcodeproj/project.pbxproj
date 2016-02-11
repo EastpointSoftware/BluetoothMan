@@ -48,6 +48,7 @@
 		1397EA741C6A3AA10067F027 /* BLESIGGATTProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA731C6A3AA10067F027 /* BLESIGGATTProfiles.swift */; };
 		1397EA761C6A3B380067F027 /* ServiceProfileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA751C6A3B380067F027 /* ServiceProfileUtils.swift */; };
 		1397EA781C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA771C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift */; };
+		1397EA7A1C6D450C0067F027 /* InteractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1397EA791C6D450C0067F027 /* InteractViewController.swift */; };
 		13F1557D1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1557C1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,7 @@
 		1397EA731C6A3AA10067F027 /* BLESIGGATTProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLESIGGATTProfiles.swift; sourceTree = "<group>"; };
 		1397EA751C6A3B380067F027 /* ServiceProfileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProfileUtils.swift; sourceTree = "<group>"; };
 		1397EA771C6A3D5B0067F027 /* TISensorTagServiceProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TISensorTagServiceProfiles.swift; sourceTree = "<group>"; };
+		1397EA791C6D450C0067F027 /* InteractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractViewController.swift; sourceTree = "<group>"; };
 		13F1557C1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralServiceCharacteristicDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +177,7 @@
 				138159151C5106CF00717D0E /* Central */,
 				1368D9381C24505A0014F041 /* AppDelegate.swift */,
 				1368D93C1C24505A0014F041 /* Main.storyboard */,
+				1397EA791C6D450C0067F027 /* InteractViewController.swift */,
 				13F1557C1C5A728300AEEB56 /* PeripheralServiceCharacteristicDetailsViewController.swift */,
 				138159611C52814200717D0E /* PeripheralServiceCharacteristicViewController.swift */,
 				1381595F1C52805600717D0E /* PeripheralServiceCharacteristicsViewController.swift */,
@@ -448,6 +451,7 @@
 				138159251C51088700717D0E /* Logger.swift in Sources */,
 				138159501C51396600717D0E /* Notify.swift in Sources */,
 				1381594B1C51372900717D0E /* PeripheralCell.swift in Sources */,
+				1397EA7A1C6D450C0067F027 /* InteractViewController.swift in Sources */,
 				138159311C51128F00717D0E /* Definition.swift in Sources */,
 				1381591F1C5107C200717D0E /* Service.swift in Sources */,
 				138159521C5139E200717D0E /* UIAlertViewExtensions.swift in Sources */,
