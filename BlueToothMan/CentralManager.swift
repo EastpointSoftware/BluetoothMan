@@ -22,19 +22,19 @@ extension CBCentralManager : CBCentralManagerInjectable {}
 
 public class CentralManager : NSObject, CBCentralManagerDelegate {
     
-    private var afterPowerOnPromise                             = Promise<Void>()
-    private var afterPowerOffPromise                            = Promise<Void>()
-    
-    private var _isScanning                                     = false
     
     internal var afterPeripheralDiscoveredPromise               = StreamPromise<Peripheral>()
     internal var discoveredPeripherals                          = [NSUUID: Peripheral]()
+    internal var timeoutSeconds                                 = 10.0
     
-    internal var timeoutSeconds     = 10.0
     
     
-
+    private var afterPowerOnPromise                             = Promise<Void>()
+    private var afterPowerOffPromise                            = Promise<Void>()
+    private var _isScanning                                     = false
     
+    // Conforms to the protocol CBCentralManagerInjectable. 
+    //Means that it should implement the methods defined in protocol.
     public var cbCentralManager : CBCentralManagerInjectable!
     public let centralQueue : Queue
     
@@ -48,13 +48,14 @@ public class CentralManager : NSObject, CBCentralManagerDelegate {
     
     public var peripherals : [Peripheral] {
         return Array(self.discoveredPeripherals.values).sort() {(p1:Peripheral, p2:Peripheral) -> Bool in
+            print("P1 " + p1.name + "   P2 " + p2.name)
             switch p1.discoveredAt.compare(p2.discoveredAt) {
-            case .OrderedSame:
-                return true
-            case .OrderedDescending:
-                return false
-            case .OrderedAscending:
-                return true
+                case .OrderedSame:
+                    return true
+                case .OrderedDescending:
+                    return false
+                case .OrderedAscending:
+                    return true
             }
         }
     }
@@ -78,13 +79,18 @@ public class CentralManager : NSObject, CBCentralManagerDelegate {
         return StaticInstance.instance!
     }
     
+    
     private override init() {
         self.centralQueue = Queue(dispatch_queue_create("edu.jeeva.central.main", DISPATCH_QUEUE_SERIAL))
         super.init()
         self.cbCentralManager = CBCentralManager(delegate:self, queue:self.centralQueue.queue)
+        
     }
     
-    public init(queue:dispatch_queue_t, options: [String:AnyObject]?=nil) {
+    //Below initialisers may njot be required. We are only using basic initialiser above
+    // These are the different initialise the CBCentralManager provides. Since we extend the CBCentralManager, these additional inits are provided.
+    
+ /*    public init(queue:dispatch_queue_t, options: [String:AnyObject]?=nil) {
         self.centralQueue = Queue(queue)
         super.init()
         self.cbCentralManager = CBCentralManager(delegate: self, queue: self.centralQueue.queue, options: options)
@@ -94,13 +100,17 @@ public class CentralManager : NSObject, CBCentralManagerDelegate {
         self.centralQueue = Queue(dispatch_queue_create("edu.jeeva.central.main", DISPATCH_QUEUE_SERIAL))
         super.init()
         self.cbCentralManager = centralManager
-    }
+    }*/
     
+    
+    //Wrapper to CBCentralManager's connectPeripheral
     public func connectPeripheral(peripheral: Peripheral, options: [String:AnyObject]? = nil) {
         if let cbPeripheral = peripheral.cbPeripheral as? CBPeripheral {
             self.cbCentralManager.connectPeripheral(cbPeripheral, options: options)
         }
     }
+    
+    //Wrapper to CBCentralManager's cancelPeripheralConnection
     
     public func cancelPeripheralConnection(peripheral: Peripheral) {
         if let cbPeripheral = peripheral.cbPeripheral as? CBPeripheral {

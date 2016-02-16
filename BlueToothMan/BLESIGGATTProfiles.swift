@@ -180,6 +180,46 @@ public struct BLESIGGATT {
         }
     }
     
+    //Carista Manufacturer service
+    public struct CaristaService :ServiceConfigurable {
+        
+        // Service Configurable protocol conformance
+        
+        public static let uuid = "FFF0"
+        public static let name = "Caristia UART Service"
+        public static let tag  = "CARISTA"
+        
+        
+        
+        // CharacteristicConfigurable
+        
+        public struct ReadCharacteristic : CharacteristicConfigurable {
+            
+            public static let uuid = "FFF1"
+            public static let name = "Read UART Characteristic"
+            public static let permissions : CBAttributePermissions      = [.Readable]
+            public static let properties : CBCharacteristicProperties   = [.Read]
+            public static let initialValue : NSData?                    = Serde.serialize(Int8(-40))
+           
+        }
+        
+        public struct WriteCharacteristic : CharacteristicConfigurable{
+            
+            public static let uuid = "FFF0"
+            public static let name = "Write UART Characteristic"
+            public static let permissions : CBAttributePermissions      = [.Writeable]
+            public static let properties : CBCharacteristicProperties   = [.Write]
+            public static let initialValue : NSData?                    = Serde.serialize(Int8(-40))
+            
+        }
+            
+        
+        
+        
+        
+        
+    }
+    
 }
 
 public class BLESIGGATTProfiles {
@@ -223,5 +263,21 @@ public class BLESIGGATTProfiles {
         
         txPowerService.addCharacteristic(txPowerLevel)
         profileManager.addService(txPowerService)
+        
+        
+        //***************************************************************************************************
+        // Carista Services
+        
+        let uartService = ConfiguredServicesProfile<BLESIGGATT.CaristaService>()
+        let readChar = StringCharacteristicProfile<BLESIGGATT.CaristaService.ReadCharacteristic>()
+        let writeChar = StringCharacteristicProfile<BLESIGGATT.CaristaService.WriteCharacteristic>()
+        uartService.addCharacteristic(readChar)
+        uartService.addCharacteristic(writeChar)
+        
+        profileManager.addService(uartService)
+        
+        
+        
+        
     }
 }

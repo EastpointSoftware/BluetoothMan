@@ -16,12 +16,13 @@ class ServiceCell : UITableViewCell {
     @IBOutlet var nameLabel     : UILabel!
     @IBOutlet var uuidLabel     : UILabel!
     @IBOutlet var uartButton    : UIButton!
+    var isClicked               : Bool = false
     
     
     
     @IBAction func InteractWithService(sender: AnyObject) {
         
-        
+        isClicked = true
         
     }
     

@@ -9,11 +9,8 @@
 
 import UIKit
 
-protocol MyCustomCellDelegator {
-    func callSegueFromCell(myData dataobject: Characteristic)
-}
 
-class PeripheralServicesViewController : UITableViewController,MyCustomCellDelegator {
+class PeripheralServicesViewController : UITableViewController {
     
     weak var peripheral             : Peripheral!
     var peripheralViewController    : PeripheralViewController!
@@ -47,34 +44,49 @@ class PeripheralServicesViewController : UITableViewController,MyCustomCellDeleg
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    
+    //called just before a segue is performed and allows you to pass variables to the new view controller that is the segue’s destination.
+    
     override func prepareForSegue(segue:UIStoryboardSegue, sender:AnyObject!) {
        
-        
+        print("\(segue.identifier)")
+       
         if segue.identifier == MainStoryboard.peripheralServicesCharacteritics {
             if let peripheral = self.peripheral {
                 if let selectedIndex = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                    
                     let viewController = segue.destinationViewController as! PeripheralServiceCharacteristicsViewController
+                    
+                    //Two objects passed to the new controller
+                    
                     viewController.service = peripheral.services[selectedIndex.row]
                     viewController.peripheralViewController = self.peripheralViewController
                     
                 }
                 
             }
+        }
+        
+            
             if segue.identifier == MainStoryboard.viewUART {
                 if let peripheral1 = self.peripheral {
-                    if let selectedIndex1 = self.tableView.indexPathForCell(sender as! UITableViewCell){
+                    print("Sender Tag \(sender.tag)")
+                    if let selectedIndex1 = sender.tag {
                         
                         let viewController1 = segue.destinationViewController as! InteractViewController
-                        viewController1.service = peripheral1.services[selectedIndex1.row]
+                        print("Selected Index \(selectedIndex1)")
+                        
+                        //Only One Object is passed to New controller
+                        viewController1.service = peripheral1.services[selectedIndex1]
 
                     }
                 }
             }
             
             
-        }
+        
     }
+    
     
     override func shouldPerformSegueWithIdentifier(identifier:String?, sender:AnyObject?) -> Bool {
        
@@ -82,9 +94,6 @@ class PeripheralServicesViewController : UITableViewController,MyCustomCellDeleg
     }
     
     
-    func callSegueFromCell(myData mydata: Characteristic){
-        
-    }
     
     func peripheralDisconnected() {
         Logger.debug()
@@ -123,8 +132,11 @@ class PeripheralServicesViewController : UITableViewController,MyCustomCellDeleg
         print("\(indexPath.row)")
         
         
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(MainStoryboard.peripheralServiceCell, forIndexPath: indexPath) as! ServiceCell
         
+            cell.uartButton.tag = indexPath.row
+            //cell.uartButton.addTarget(self, action: "buttonClicked", forControlEvents: UIControlEvents.TouchUpInside)
             
             let service = peripheral.services[indexPath.row]
             cell.nameLabel.text = service.name

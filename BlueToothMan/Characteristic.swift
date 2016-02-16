@@ -20,11 +20,11 @@ struct ReadParameters {
 }
 
 struct CharacteristicIO {
-    static let queue = Queue("us.gnos.characteristic")
+    static let queue = Queue("edu.jeeva.characteristic")
 }
 
 struct CharacteristicTimeout {
-    static let queue = Queue("us.gnos.characteristic.timeout")
+    static let queue = Queue("edu.jeeva.characteristic.timeout")
 }
 
 public class Characteristic {
