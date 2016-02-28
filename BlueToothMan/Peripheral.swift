@@ -29,6 +29,8 @@ public protocol CBPeripheralInjectable {
     func setNotifyValue(state:Bool, forCharacteristic:CBCharacteristic)
     func readValueForCharacteristic(characteristic:CBCharacteristic)
     func writeValue(data:NSData, forCharacteristic:CBCharacteristic, type:CBCharacteristicWriteType)
+    
+    
 }
 
 extension CBPeripheral : CBPeripheralInjectable {}
@@ -388,6 +390,8 @@ public class Peripheral : NSObject, CBPeripheralDelegate {
             bcCharacteristic.didUpdate(error)
         }
     }
+    
+    
     
     public func didWriteValueForCharacteristic(characteristic: CBCharacteristic, error: NSError?) {
         Logger.debug()
