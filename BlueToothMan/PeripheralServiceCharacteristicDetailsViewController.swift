@@ -42,7 +42,7 @@ class PeripheralServiceCharacteristicDetailsViewController :UIViewController {
     }
     
     func UISetup(){
-        
+        Logger.debug()
         self.peripheralUUID.text = self.characteristic.peripheralUUID.UUIDString
         self.ServiceUUID.text = self.characteristic.serviceUUID.UUIDString
         self.characteristicUUID.text = self.characteristic.uuid.UUIDString
@@ -65,5 +65,46 @@ class PeripheralServiceCharacteristicDetailsViewController :UIViewController {
         
     }
     
+   
+    @IBAction func onSetNotify(sender: AnyObject) {
+        
+        if  notifyValue.on {
+            var error : NSError?
+            
+            self.characteristic.startNotifying()
+            
+            if let characteristic = self.characteristic {
+                if characteristic.isNotifying {
+                    let future = characteristic.recieveNotificationUpdates()
+                    future.onSuccess {_ in
+                        
+                        self.characteristicValue.text = characteristic.cbCharacteristic.value?.hexStringValue()
+                    }
+                    future.onFailure{(error) in
+                        self.presentViewController(UIAlertController.alertOnError("Characteristic Notification Error", error:error), animated:true, completion:nil)
+                    }
+                } else{
+                    
+                    self.presentViewController(UIAlertController.alertOnError("Charcteristic Read Error", error:error!) {(action) in
+                        self.navigationController?.popViewControllerAnimated(true)
+                        return
+                        }, animated:true, completion:nil)
+                }
+                
+            
+            
+            
+        }else{
+            
+            
+            self.characteristic.stopNotifying()
+        }
+        
+    }
     
+    
+
+    }
+
+
 }
