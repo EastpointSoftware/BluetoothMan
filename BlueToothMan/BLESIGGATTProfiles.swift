@@ -215,9 +215,6 @@ public struct BLESIGGATT {
             
         
         
-        
-        
-        
     }
     
 }

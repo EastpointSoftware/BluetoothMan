@@ -54,8 +54,12 @@ class PeripheralsListsController : UITableViewController {
     }
     
     override func prepareForSegue(segue:UIStoryboardSegue, sender:AnyObject!) {
+       
+        
         if segue.identifier == MainStoryboard.peripheralSegue {
             if let selectedIndex = self.tableView.indexPathForCell(sender as! UITableViewCell) {
+                self.connect(self.centralManager.peripherals[selectedIndex.row])
+                
                 let viewController = segue.destinationViewController as! PeripheralViewController
                 viewController.peripheral = self.centralManager.peripherals[selectedIndex.row]
             }
@@ -68,7 +72,7 @@ class PeripheralsListsController : UITableViewController {
             if identifier == MainStoryboard.peripheralSegue {
                 if let selectedIndex = self.tableView.indexPathForCell(sender as! UITableViewCell) {
                     let peripheral = self.centralManager.peripherals[selectedIndex.row]
-                    perform = (peripheral.state == .Connected)
+                    perform = true //(peripheral.state == .Connected)
                 }
             }
         }
@@ -166,7 +170,7 @@ class PeripheralsListsController : UITableViewController {
       
         let afterPeripheralDiscovered = {(peripheral:Peripheral) -> Void in
             Notify.withMessage("Discovered peripheral '\(peripheral.name)'")
-            self.connect(peripheral)
+            //self.connect(peripheral)
             self.updateWhenActive()
         }
         
@@ -185,7 +189,6 @@ class PeripheralsListsController : UITableViewController {
         
         //for timed scanning
         //future = self.centralManager.startScanningTimed(Double(ConfigStore.getScanTimeout()), capacity:10)
-        
         
         future.onSuccess(afterPeripheralDiscovered)
         future.onFailure(afterTimeout)

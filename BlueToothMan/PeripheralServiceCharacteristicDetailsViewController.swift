@@ -31,80 +31,110 @@ class PeripheralServiceCharacteristicDetailsViewController :UIViewController {
     override func viewDidLoad() {
         
         self.UISetup()
-
-    
+        //self.characteristic.startNotifying()
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-    
-            self.UISetup()
+        
+        self.UISetup()
         
     }
     
     func UISetup(){
         Logger.debug()
+        
         self.peripheralUUID.text = self.characteristic.peripheralUUID.UUIDString
         self.ServiceUUID.text = self.characteristic.serviceUUID.UUIDString
         self.characteristicUUID.text = self.characteristic.uuid.UUIDString
         self.notifyValue.setOn(false, animated: true)
-        if let stringValues = characteristic.stringValue {
-            let names = Array(stringValues.keys)
-            let values = Array(stringValues.values)
-            
-            for var i = names.count; i < names.count; i++ {
+        
+    }
+    
+    
+    
+    //=======
+    
+    @IBAction func onSetNotify(sender: AnyObject) {
+        
+        if let characteristic = self.characteristic {
+            if characteristic.isNotifying{
+                let future = characteristic.startNotifying()
+                future.onSuccess { _ in
+                    Logger.debug("Notification Started")
+                    self.notify()
+                }
                 
-                self.characteristicValue.text = self.characteristicValue.text! + names[i] + " : "
-                self.characteristicValue.text = self.characteristicValue.text! + values[i] + " / "
+                future.onFailure { (error) in
+                    
+                    self.presentViewController(UIAlertController.alertOnError("Start Notifications Error", error:error), animated:true, completion:nil)
+                }
+            }else{
                 
+                let future = characteristic.stopNotifying()
             }
             
             
-        }else{
-            print("No String Values")
+            
+            
         }
         
     }
     
-   
-    @IBAction func onSetNotify(sender: AnyObject) {
+    //=========
+    
+    
+    func notify(){
         
-        if  notifyValue.on {
-            var error : NSError?
-            
-            self.characteristic.startNotifying()
-            
-            if let characteristic = self.characteristic {
-                if characteristic.isNotifying {
-                    let future = characteristic.recieveNotificationUpdates()
-                    future.onSuccess {_ in
-                        
-                        self.characteristicValue.text = characteristic.cbCharacteristic.value?.hexStringValue()
-                    }
-                    future.onFailure{(error) in
-                        self.presentViewController(UIAlertController.alertOnError("Characteristic Notification Error", error:error), animated:true, completion:nil)
-                    }
-                } else{
+        if let characteristic = self.characteristic {
+            if characteristic.isNotifying {
+                let future = characteristic.recieveNotificationUpdates()
+                
+                
+                future.onSuccess {_ in
+                   
+                    self.updateUI()
                     
-                    self.presentViewController(UIAlertController.alertOnError("Charcteristic Read Error", error:error!) {(action) in
-                        self.navigationController?.popViewControllerAnimated(true)
-                        return
-                        }, animated:true, completion:nil)
+                }
+                future.onFailure{(error) in
+                    self.presentViewController(UIAlertController.alertOnError("Characteristic Notification Error", error:error), animated:true, completion:nil)
+                }
+            }
+            
+            
+        }
+        
+    }
+    
+    func updateUI(){
+        
+        if let characteristic = self.characteristic {
+            if let stringValues = characteristic.stringValue {
+                let names = Array(stringValues.keys)
+                let values = Array(stringValues.values)
+                if names.count>0 {
+                    self.characteristicValue.text = " ss" + names[0] + " : " +  values[0]
+                }else{
+                    
+                    self.characteristicValue.text = "UNKNOWN"
                 }
                 
+            }
             
-            
-            
-        }else{
-            
-            
-            self.characteristic.stopNotifying()
         }
+        
         
     }
     
     
-
-    }
-
-
+    
+    ///-============
+    
+    
 }
+
+
+
+
+
